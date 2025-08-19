@@ -6,12 +6,12 @@ import { Users, DollarSign, TrendingUp, AlertTriangle, CheckCircle, Clock } from
 
 export default function AdminDashboard() {
   const kpis = [
-    { title: "GMV Total", value: "$2,450,000", change: "+12.5%", icon: DollarSign, color: "text-green-600" },
-    { title: "Take Rate", value: "3.2%", change: "+0.3%", icon: TrendingUp, color: "text-blue-600" },
-    { title: "Fill Rate RFQ", value: "78%", change: "+5.2%", icon: CheckCircle, color: "text-emerald-600" },
-    { title: "OTD (On Time Delivery)", value: "92%", change: "+2.1%", icon: Clock, color: "text-amber-600" },
-    { title: "Usuarios Activos", value: "1,247", change: "+18%", icon: Users, color: "text-purple-600" },
-    { title: "Disputas Activas", value: "23", change: "-15%", icon: AlertTriangle, color: "text-red-600" },
+    { title: "GMV Total", value: "$2,450,000", change: "+12.5%", icon: "DollarSign", color: "text-green-600" },
+    { title: "Take Rate", value: "3.2%", change: "+0.3%", icon: "TrendingUp", color: "text-blue-600" },
+    { title: "Fill Rate RFQ", value: "78%", change: "+5.2%", icon: "CheckCircle", color: "text-emerald-600" },
+    { title: "OTD (On Time Delivery)", value: "92%", change: "+2.1%", icon: "Clock", color: "text-amber-600" },
+    { title: "Usuarios Activos", value: "1,247", change: "+18%", icon: "Users", color: "text-purple-600" },
+    { title: "Disputas Activas", value: "23", change: "-15%", icon: "AlertTriangle", color: "text-red-600" },
   ]
 
   const recentOrders = [
@@ -65,6 +65,26 @@ export default function AdminDashboard() {
     },
   ]
 
+  const renderIcon = (iconName: string, className: string) => {
+    const iconProps = { className }
+    switch (iconName) {
+      case "DollarSign":
+        return <DollarSign {...iconProps} />
+      case "TrendingUp":
+        return <TrendingUp {...iconProps} />
+      case "CheckCircle":
+        return <CheckCircle {...iconProps} />
+      case "Clock":
+        return <Clock {...iconProps} />
+      case "Users":
+        return <Users {...iconProps} />
+      case "AlertTriangle":
+        return <AlertTriangle {...iconProps} />
+      default:
+        return <DollarSign {...iconProps} />
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="border-b bg-white">
@@ -85,7 +105,7 @@ export default function AdminDashboard() {
             <Card key={index}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium text-gray-600">{kpi.title}</CardTitle>
-                <kpi.icon className={`h-4 w-4 ${kpi.color}`} />
+                {renderIcon(kpi.icon, `h-4 w-4 ${kpi.color}`)}
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{kpi.value}</div>
